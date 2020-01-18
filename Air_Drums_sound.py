@@ -12,7 +12,7 @@ class soun(threading.Thread):
     def run(self):
         self.keeprunning = True
         while self.keeprunning:
-            winsound.PlaySound('new bass.wav', winsound.SND_FILENAME|winsound.SND_NOWAIT)
+            winsound.PlaySound('Kick Drum.wav', winsound.SND_FILENAME|winsound.SND_NOWAIT)
 a=soun()
 a.start()
 
