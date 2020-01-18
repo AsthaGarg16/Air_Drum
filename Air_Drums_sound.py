@@ -52,7 +52,7 @@ while True:
     # importing foreground image (drums)
     foreground = cv2.imread('final_drums_bgimg.png')
     window_name = 'Air Drums'
-    overlay = cv2.addWeighted(frame[:900, :1440], 0.1, foreground[:, :], 0.5, 0)
+    overlay = cv2.addWeighted(frame[:900, :1440], 0.4, foreground[:, :], 0.6, 0)
     frame[:900, :1440] = overlay
     frame = frame[:900, :1440]
     frame = cv2.flip(frame, 1)
