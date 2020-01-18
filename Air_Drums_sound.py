@@ -47,6 +47,15 @@ while True:
     frame = imutils.resize(frame, height=900, width=1440)
     blurred = cv2.GaussianBlur(frame, (11, 11), 0)
     hsv = cv2.cvtColor(blurred, cv2.COLOR_BGR2HSV)
+    
+    frame = cv2.flip(frame, 1)
+    # importing foreground image (drums)
+    foreground = cv2.imread('final_drums_bgimg.png')
+    window_name = 'Air Drums'
+    overlay = cv2.addWeighted(frame[:900, :1440], 0.1, foreground[:, :], 0.5, 0)
+    frame[:900, :1440] = overlay
+    frame = frame[:900, :1440]
+    frame = cv2.flip(frame, 1)
 
     # construct a mask for the color "green" and "pink", then perform a series of dilations and erosions to
     # remove any small blobs left in the mask
@@ -124,12 +133,6 @@ while True:
         cv2.line(frame, pts2[i - 1], pts2[i], (0, 0, 255), thickness)
     # show the frame to our screen
     frame = cv2.flip(frame, 1)
-    # importing foreground image (drums)
-    foreground = cv2.imread('final_drums_bgimg.png')
-    window_name = 'Air Drums'
-    overlay = cv2.addWeighted(frame[:900, :1440], 0.5, foreground[:, :], 0.5, 0)
-    frame[:900, :1440] = overlay
-    frame = frame[:900, :1440]
     cv2.imshow(window_name, frame)
     key = cv2.waitKey(1) & 0xFF
 
