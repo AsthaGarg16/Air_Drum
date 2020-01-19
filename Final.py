@@ -9,19 +9,6 @@ import screeninfo
 import threading
 import winsound
 import pygame
-class soun(threading.Thread):
-    def run(self):
-        self.keeprunning = True
-        while self.keeprunning:
-            winsound.PlaySound('new bass.wav', winsound.SND_FILENAME|winsound.SND_NOWAIT)
-a=soun()
-a.start()
-pygame.init()
-rightDrum = pygame.mixer.Sound("right drum.wav")
-threeDrums=pygame.mixer.Sound("three drums.wav")
-cymbals=pygame.mixer.Sound("cymbals.wav")
-hiHat=pygame.mixer.Sound("hi hat.wav")
-
 
 # construct the argument parse and parse the arguments
 ap = argparse.ArgumentParser()
@@ -43,6 +30,20 @@ vs = VideoStream(src=0).start()
 
 # allow the camera or video file to warm up
 time.sleep(2.0)
+
+class soun(threading.Thread):
+    def run(self):
+        self.keeprunning = True
+        while self.keeprunning:
+            winsound.PlaySound('Kick Drum.wav', winsound.SND_FILENAME|winsound.SND_NOWAIT)
+a=soun()
+a.start()
+pygame.init()
+rightDrum = pygame.mixer.Sound("snare final.wav")
+tom1=pygame.mixer.Sound("tom1.wav")
+tom2=pygame.mixer.Sound("tom2.wav")
+cymbals=pygame.mixer.Sound("cymbals final.wav")
+hiHat=pygame.mixer.Sound("hi hat final.wav")
 
 # keep looping
 while True:
@@ -113,22 +114,22 @@ while True:
         thickness = int(np.sqrt(args["buffer"] / float(i + 1)))
         if 70<x<270 and 720<y<875 :
             cv2.line(frame, pts1[i - 1], pts1[i], (255, 255, 0), thickness)
-            pygame.mixer.Sound.play(rightDrum)
+            pygame.mixer.Sound.play(cymbals)
             pygame.mixer.music.stop()
            
         elif 275<x<560 and 520<y<720:
             cv2.line(frame, pts1[i - 1], pts1[i], (255, 0, 255), thickness)
-            pygame.mixer.Sound.play(threeDrums)
+            pygame.mixer.Sound.play(tom1)
             pygame.mixer.music.stop()
             
         elif 600<x<875 and 520<y<700:
             cv2.line(frame, pts1[i - 1], pts1[i], (0, 255, 255), thickness)
-            pygame.mixer.Sound.play(threeDrums)
+            pygame.mixer.Sound.play(tom2)
             pygame.mixer.music.stop()
            
         elif 880<x<1110 and 700<y<865:
             cv2.line(frame, pts1[i - 1], pts1[i], (0, 255, 0), thickness)
-            pygame.mixer.Sound.play(cymbals)
+            pygame.mixer.Sound.play(rightDrum)
             pygame.mixer.music.stop()            
         elif 1010<x<1410 and 300<y<525:
             cv2.line(frame, pts1[i - 1], pts1[i], (255, 255, 255), thickness)
